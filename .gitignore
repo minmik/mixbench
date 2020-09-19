@@ -41,3 +41,4 @@ mixbench-ocl-ro
 
 # Other
 version_info.h
+build/*

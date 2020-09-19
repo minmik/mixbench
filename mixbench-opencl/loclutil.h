@@ -7,6 +7,7 @@
 #ifndef _OCLUTIL_H_
 #define _OCLUTIL_H_
 
+#define CL_TARGET_OPENCL_VERSION 200
 #include <cstdio>
 #include <cstdlib>
 #include <CL/opencl.h>
