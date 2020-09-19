@@ -4,13 +4,10 @@ project(mixbench-ocl LANGUAGES CXX)
 #find_package(OpenCL REQUIRED)
 # Manually set OpenCL directories
 set(OpenCL_INCLUDE_DIR /home/jongminkim/project/OpenCL-Headers)
-# add_library(opencl_library SHARED IMPORTED)
-# set_property(TARGET opencl_library PROPERTY IMPORTED_LOCATION /home/jongminkim/project/libOpenCL.so)
-set(OpenCL_LIBRARY /home/jongminkim/project/libOpenCL.so)
-
+set(OpenCL_LINK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../lib64_f8131)
 
 include_directories(${OpenCL_INCLUDE_DIR} "../include")
-link_directories("/home/jongminkim/project")
+link_directories(${OpenCL_LINK_DIR})
 
 # Get version info from git tag
 execute_process(COMMAND git describe --tags --always
@@ -46,5 +43,5 @@ if(NOT ${HAVE_HALF2})
 	target_compile_definitions(mixbench-ocl-ro PRIVATE HF_WORKAROUND)
 endif()
 
-target_link_libraries(mixbench-ocl-alt ${OpenCL_LIBRARY} "/home/jongminkim/project/libc++.so" "/home/jongminkim/project/libcutils.so" "/home/jongminkim/project/liblog.so")
-target_link_libraries(mixbench-ocl-ro ${OpenCL_LIBRARY} "/home/jongminkim/project/libc++.so" "/home/jongminkim/project/libcutils.so"  "/home/jongminkim/project/liblog.so")
+target_link_libraries(mixbench-ocl-alt "${OpenCL_LINK_DIR}/libOpenCL.so" "${OpenCL_LINK_DIR}/libc++.so" "${OpenCL_LINK_DIR}/libcutils.so" "${OpenCL_LINK_DIR}/liblog.so")
+target_link_libraries(mixbench-ocl-ro "${OpenCL_LINK_DIR}/libOpenCL.so" "${OpenCL_LINK_DIR}/libc++.so" "${OpenCL_LINK_DIR}/libcutils.so"  "${OpenCL_LINK_DIR}/liblog.so")
